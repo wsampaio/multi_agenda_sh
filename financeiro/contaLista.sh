@@ -1,13 +1,12 @@
 #!/bin/bash
 
-clear
-
 
 contasDoMes(){
 	
 	dbFinanceiro="$db/financeiro.db"
 
-	echo
+    clear
+	echo -e "\033[00;37m"
 	echo "Digite o mês/ano de referência (mm/aaaa):"
 	read mesRef
 
@@ -58,14 +57,12 @@ SELECT
 		dt_vencimento
 ;
 "
-	#db="../multi_agenda_java/DB-multi_agenda/financeiro.db"
-	#db="../sqlite/financeiro.db"
 
 	sqlite3 $dbFinanceiro  "$sql"
 
 	echo
 	echo
-	echo "Fim da consulta (pressione qualquer tecla)"
+	echo "Fim da consulta (pressione enter)"
 	read
 	main
 
