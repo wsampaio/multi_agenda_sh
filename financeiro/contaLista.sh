@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-contasDoMes(){
+contaLista(){
 	
 	dbFinanceiro="$db/financeiro.db"
 
@@ -18,9 +18,10 @@ contasDoMes(){
 	echo
 	echo "Contas referêntes ao mês: $mesRef"
 	echo
+#         =================================================
 	echo "====|======================|==========|=======|=="
 
-	sql="
+	sqlContaLista="
 
 
 SELECT 
@@ -57,14 +58,32 @@ SELECT
 		dt_vencimento
 ;
 "
+	if [ -f $dbFinanceiro ]; then
+		sqlite3 $dbFinanceiro "$sqlContaLista"
+	else
+		echo "O Banco de dados não existe"
+	fi
+	
 
-	sqlite3 $dbFinanceiro  "$sql"
-
-	echo
 	echo
 	echo "Fim da consulta (pressione enter)"
-	read
-	main
+	echo "ou digite o cod para visualizar"
+	
+	
+	read codConta
+
+	if [ $codConta != "" ]
+	then
+		conta $codConta
+	else
+		main
+	fi
+	
+	
+	
+	
+	
+	
 
 }
 
