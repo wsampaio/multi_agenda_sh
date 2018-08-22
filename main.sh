@@ -2,6 +2,7 @@
 
 . ./financeiro/contaLista.sh 
 . ./financeiro/conta.sh 
+. ./financeiro/receitaLista.sh
 
 #. ./script.sh --source-only
 
@@ -14,7 +15,8 @@ main(){
 	echo -e "\033[00;37m
 Digite uma opcao:
 \033[00;37m1 - \033[01;35mmostrar contas do mes
-\033[00;37m2 - \033[01;35msair
+\033[00;37m2 - \033[01;35mReceitas
+\033[00;37m3 - \033[01;35msair
 "
 
 	read opcao
@@ -24,6 +26,10 @@ Digite uma opcao:
 		clear
 		contaLista
 	elif [ $opcao -eq 2 ]
+	then
+		clear
+		receitaLista
+	elif [ $opcao -eq 3 ]
 	then
 		#do nothing
 		clear
