@@ -61,14 +61,26 @@ SELECT
 
 	echo
 	echo "Fim da consulta (pressione enter)"
-	echo "ou digite o cod para visualizar"
+	echo "ou digite:"
+	echo "1 - para detalhes da receita"
+	echo "2 - para Contas pagas pela receita"
 	
 	
-	read codReceita
+	read opcao
 
-	if [ $codReceita != "" ]
+
+
+	if [ $opcao -eq 1 ]
 	then
-		receita $codReceita
+		echo "digite o código da receita:"
+		read codReceita
+		#receita $codReceita
+		main
+	elif [ $opcao -eq 2 ]
+	then
+		echo "digite o código da receita:"
+		read codReceita
+		contasPelaReceita $codReceita
 	else
 		main
 	fi
