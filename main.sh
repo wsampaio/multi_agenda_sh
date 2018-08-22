@@ -16,9 +16,9 @@ main(){
 	clear
 	echo -e "\033[00;37m
 Digite uma opcao:
-\033[00;37m1 - \033[01;35mmostrar contas do mes
+\033[00;37m1 - \033[01;35mContas
 \033[00;37m2 - \033[01;35mReceitas
-\033[00;37m3 - \033[01;35msair
+\033[00;37m3 - \033[01;35mSair
 "
 
 	read opcao
@@ -35,11 +35,11 @@ Digite uma opcao:
 	then
 		#do nothing
 		clear
-        echo -e "\033[01;31m"
+		echo -e "\033[01;31m"
 		echo "saída"
 		echo
 		echo "Developed by: linkedin.com/in/WELLSampaio"
-		echo
+		echo -e "\033[00m"
 		echo 
 		#sleep 3
 		read
