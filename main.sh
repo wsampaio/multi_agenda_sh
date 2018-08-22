@@ -4,6 +4,8 @@
 . ./financeiro/conta.sh 
 . ./financeiro/receitaLista.sh
 
+. ./financeiro/contasPelaReceita.sh
+
 #. ./script.sh --source-only
 
 
