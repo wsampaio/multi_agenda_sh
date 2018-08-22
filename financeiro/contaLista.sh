@@ -15,10 +15,11 @@ contaLista(){
 			mesRef=`date +%m/%Y`
 	fi
 
+	clear
 	echo
 	echo "Contas referêntes ao mês: $mesRef"
 	echo
-#         =================================================
+#             =================================================
 	echo "====|======================|==========|=======|=="
 
 	sqlContaLista="
@@ -64,22 +65,26 @@ SELECT
 		echo "O Banco de dados não existe"
 	fi
 	
-
 	echo
-	echo "Fim da consulta (pressione enter)"
-	echo "ou digite o cod para visualizar"
+	echo "Fim da consulta. Digite:"
+	echo "(enter) - Nova consulta;"
+	echo "A - para detalhes da conta;"
+	echo "B - sair;"
 	
-	
-	read codConta
+	read opcao
 
-	if [ $codConta != "" ]
+	if [ ${opcao,,} = "a" ]
 	then
+		echo
+		echo "digite o código da conta:"
+		read codConta
 		conta $codConta
-	else
+	elif [ ${opcao,,} = "b" ]
+	then
 		main
+	else
+		contaLista
 	fi
-	
-	
 	
 	
 	
