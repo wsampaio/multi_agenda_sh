@@ -1,7 +1,7 @@
 #!/bin/bash
 
 . ./financeiro/contaLista.sh 
-
+. ./financeiro/conta.sh 
 
 #. ./script.sh --source-only
 
