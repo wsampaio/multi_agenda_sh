@@ -6,7 +6,7 @@
 #. ./script.sh --source-only
 
 
-db="../multi_agenda_java/DB-multi_agenda"
+db="../DB-multi_agenda"
 #db="../sqlite"
 
 main(){
@@ -22,7 +22,7 @@ Digite uma opcao:
 	if [ $opcao -eq 1 ]
 	then
 		clear
-		contasDoMes
+		contaLista
 	elif [ $opcao -eq 2 ]
 	then
 		#do nothing
@@ -33,7 +33,8 @@ Digite uma opcao:
 		echo "Developed by: linkedin.com/in/WELLSampaio"
 		echo
 		echo 
-		sleep 3
+		#sleep 3
+		read
 		clear	
 	else
 		main
