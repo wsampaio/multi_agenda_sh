@@ -5,7 +5,7 @@ receitaLista(){
 	
 	dbFinanceiro="$db/financeiro.db"
 
-    clear
+	clear
 	echo -e "\033[00;37m"
 	echo "Digite o mês/ano de referência (mm/aaaa):"
 	read mesRef
@@ -15,10 +15,11 @@ receitaLista(){
 			mesRef=`date +%m/%Y`
 	fi
 
+	clear
 	echo
 	echo "Receita referêntes ao mês: $mesRef"
 	echo
-#         =================================================
+#             =================================================
 	echo "====|========================|==========|========"
 
 	sqlReceitaLista="
@@ -59,37 +60,38 @@ SELECT
 	fi
 	
 
+
+
+
+
 	echo
-	echo "Fim da consulta (pressione enter)"
-	echo "ou digite:"
-	echo "1 - para detalhes da receita"
-	echo "2 - para Contas pagas pela receita"
-	
-	
+	echo "Fim da consulta. Digite:"
+	echo "(enter) - Nova consulta;"
+	echo "A - para detalhes da receita"
+	echo "B - para contas pagas pela receita"
+	echo "C - sair;"
+							
 	read opcao
-
-
-
-	if [ $opcao -eq 1 ]
+				
+	if [ ${opcao,,} = "a" ]
 	then
+		echo
 		echo "digite o código da receita:"
 		read codReceita
 		#receita $codReceita
 		main
-	elif [ $opcao -eq 2 ]
+	elif [ ${opcao,,} = "b" ]
 	then
+		echo
 		echo "digite o código da receita:"
 		read codReceita
 		contasPelaReceita $codReceita
-	else
+	elif [ ${opcao,,} = "c" ]
+	then
 		main
+	else
+		receitaLista
 	fi
-	
-	
-	
-	
-	
-	
 
 }
 
