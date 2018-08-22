@@ -18,7 +18,20 @@ conta(){
 
 
 SELECT 
-		*
+		cod_conta,
+		contas.cod_tipo_conta,
+			REPLACE(descricao, ' ', '_')
+		AS descricao,
+		mes_referencia,
+		dt_vencimento,
+		cod_barras,
+		valor,
+		cod_receita_pagadora,
+		contas.cod_pagador,
+		conta_paga,
+		valor_pago,
+		dt_pagamento
+
 	FROM 
 		contas 
 			LEFT JOIN tipos_conta
