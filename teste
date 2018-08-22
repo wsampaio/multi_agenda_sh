@@ -1,0 +1,79 @@
+#!/bin/bash
+
+clear
+
+echo "teste lower case"
+string="eco o caralho!!!"
+string="EcO O cArAlHo!!!"
+echo "${string}"
+echo "${string,}"
+echo "${string,,}"
+echo
+echo "teste upper case"
+echo "${string^}"
+echo "${string^^}"
+
+echo
+echo
+echo "teste cores das fontes"
+echo
+echo -e "\033[00m NORMAL"
+
+echo -e "\033[01;35m ROXA (diz que é magenta)"
+
+echo -e "\033[00m VOLTA AO NORMAL"
+
+#ESTILOS
+#00: Nenhum
+#01: Negrito
+#04: Sublinhado
+#05: Piscante
+#07: Reverso
+#08: Oculto 
+
+#CORES DE TEXTO
+#30: Preto
+#31: Vermelho
+#32: Verde
+#33: Amarelo
+#34: Azul
+#35: Magenta (Rosa)
+#36: Ciano (Azul Ciano)
+#37: Branco 
+
+#CORES DE FUNDO
+
+#40: Preto
+#41: Vermelho
+#42: Verde
+#43: Amarelo
+#44: Azul
+#45: Magenta (Rosa)
+#46: Ciano (Azul Ciano)
+#47: Branco
+
+#Google com fundo branco! =)
+echo -e '\033[01;34;47mG\033[01;31mo\033[01;33mo\033[01;34mg\033[01;32ml \033[01;31me\033[00m'
+
+#Matrix verde CGA =)!
+echo -e '\033[01;32mmAtTiX\033[00;37m'
+
+#Erro fatal vermelho e piscante pra impressionar!!!
+echo -e '\033[05;01;31;43;07mERRO FATAL\033[00;37m'
+
+#Viva o Linux
+echo -e '\033[01;37mViva o \033[04;32mLinux\033[00;37m!!!'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
