@@ -1,5 +1,6 @@
 #!/bin/bash
 
+. ./db.sh
 . ./financeiro/contaLista.sh 
 . ./financeiro/conta.sh 
 . ./financeiro/receitaLista.sh
@@ -9,8 +10,6 @@
 #. ./script.sh --source-only
 
 
-db="../DB-multi_agenda"
-#db="../sqlite"
 
 main(){
 	clear
