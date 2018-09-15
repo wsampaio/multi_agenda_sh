@@ -15,22 +15,24 @@ main(){
 	clear
 	echo -e "\033[00;37m
 Digite uma opcao:
-\033[00;37m1 - \033[01;35mContas
-\033[00;37m2 - \033[01;35mReceitas
-\033[00;37m3 - \033[01;35mSair
+\033[00;37ma - \033[01;35mContas
+\033[00;37mb - \033[01;35mReceitas
+\033[00;37mc - \033[01;35mSair
 "
 
 	read opcao
 
-	if [ $opcao -eq 1 ]
+${opcao,,} = "a"
+
+	if [ ${opcao,,} = "a" ]
 	then
 		clear
 		contaLista
-	elif [ $opcao -eq 2 ]
+	elif [ ${opcao,,} = "b" ]
 	then
 		clear
 		receitaLista
-	elif [ $opcao -eq 3 ]
+	elif [ ${opcao,,} = "c" ]
 	then
 		#do nothing
 		clear
