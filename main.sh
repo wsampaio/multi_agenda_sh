@@ -7,6 +7,11 @@
 
 . ./financeiro/contasPelaReceita.sh
 
+. ./passmots/origemRegistro.sh 
+. ./passmots/origemRegistroLista.sh 
+
+
+
 #. ./script.sh --source-only
 
 
@@ -15,9 +20,12 @@ main(){
 	clear
 	echo -e "\033[00;37m
 Digite uma opcao:
-\033[00;37ma - \033[01;35mContas
-\033[00;37mb - \033[01;35mReceitas
-\033[00;37mc - \033[01;35mSair
+\033[00;37mA - \033[01;35mContas
+\033[00;37mB - \033[01;35mReceitas
+
+\033[00;37mC - \033[01;35mRegistros de Senhas
+
+\033[00;37mD - \033[01;35mSair
 "
 
 	read opcao
@@ -33,6 +41,10 @@ ${opcao,,} = "a"
 		clear
 		receitaLista
 	elif [ ${opcao,,} = "c" ]
+	then
+		clear
+		origemRegistroLista
+	elif [ ${opcao,,} = "d" ]
 	then
 		#do nothing
 		clear
