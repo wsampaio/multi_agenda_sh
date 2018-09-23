@@ -3,7 +3,7 @@
 
 origemRegistroLista(){
 	
-	dbPassmots="$db/passmots.db"
+	dbPassMots="$db/passmots.db"
 
     clear
 	echo
@@ -29,7 +29,7 @@ SELECT
 
 "
 	if [ -f $dbPassmots ]; then
-		sqlite3 $dbPassmots "$sqlOrigensRegistro"
+		sqlite3 $dbPassMots "$sqlOrigensRegistro"
 	else
 		echo "O Banco de dados não existe"
 	fi
@@ -46,7 +46,8 @@ SELECT
 		echo
 		echo "digite o código do registro:"
 		read codOrigemRegistro
-		conta $codOrigemRegistro
+		origemRegistro $codOrigemRegistro
+		
 	elif [ ${opcao,,} = "b" ]
 	then
 		main
