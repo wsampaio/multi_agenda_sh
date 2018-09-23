@@ -1,47 +1,27 @@
 #!/bin/bash
 
 
-conta(){
+origemRegistro(){
 	
 	#dbFinanceiro="$db/financeiro.db"
-    codConta=$1
+    codOrigemRegistro=$1
 
     clear
 	echo -e "\033[0m"
 
-	if [ ${#mesRef} -eq 0 ]
-		then
-			mesRef=`date +%m/%Y`
-	fi
-
-	sqlConta="
-
+	sqlOrigemRegistro="
 
 SELECT 
-		cod_conta,
-		contas.cod_tipo_conta,
-			REPLACE(descricao, ' ', '_')
-		AS descricao,
-		mes_referencia,
-		dt_vencimento,
-		cod_barras,
-		valor,
-		cod_receita_pagadora,
-		contas.cod_pagador,
-		conta_paga,
-		valor_pago,
-		dt_pagamento
-
+		cod_origem_registro,
+		REPLACE(origem_registro, ' ', '_')
 	FROM 
-		contas 
-			LEFT JOIN tipos_conta
-				USING (cod_tipo_conta)
+		origens_registro 
 	WHERE 
-		cod_conta = $codConta
+		cod_origem_registro = $codOrigemRegistro
 ;
 "
 
-	result=$(sqlite3 $dbFinanceiro "$sqlConta")
+	result=$(sqlite3 $dbPassMots "$sqlOrigemRegistro")
 
 
 #         =================================================
@@ -49,24 +29,66 @@ SELECT
 	result=\""${result//|/\"" \""}"\"
 	#result="${result//|/","}"
 	
-	contaObj=( $result )
+	origemRegistroObj=( $result )
 	
 	
-	echo -e "\033[01;37mcod_conta:			\033[00;35m" ${contaObj[0]}
-	echo -e "\033[01;37mcod_tipo_conta:			\033[00;35m" ${contaObj[1]}
-	echo -e "\033[01;37mdescricao:			\033[00;35m" ${contaObj[2]}
-	echo -e "\033[01;37mmes_referencia:			\033[00;35m" ${contaObj[3]}
-	echo -e "\033[01;37mdt_vencimento:			\033[00;35m" ${contaObj[4]}
-	echo -e "\033[01;37mcod_barras:			\033[00;35m" ${contaObj[5]}
-	echo -e "\033[01;37mvalor:				\033[00;35m" ${contaObj[6]}
-	echo -e "\033[01;37mcod_receita_pagadora:		\033[00;35m" ${contaObj[7]}
-	echo -e "\033[01;37mcod_pagador:			\033[00;35m" ${contaObj[8]}
-	echo -e "\033[01;37mconta_paga:			\033[00;35m" ${contaObj[9]}
-	echo -e "\033[01;37mvalor_pago:			\033[00;35m" ${contaObj[10]}
-	echo -e "\033[01;37mdt_pagamento:			\033[00;35m" ${contaObj[11]}
-	
-	
-	
+	echo -e "\033[01;37mcod_origem_registro:			\033[00;35m" ${origemRegistroObj[0]}
+	echo -e "\033[01;37morigem_registro:			\033[00;35m" ${origemRegistroObj[1]}
+
+			
+        sqlRegistros="
+
+SELECT
+				substr(campo || '           ', 0, 11)
+		AS campo,
+		registro
+	FROM
+		registros
+			LEFT JOIN tipos_campos
+				USING (cod_tipo_campo)
+	WHERE
+		cod_origem_registro = ${origemRegistroObj[0]}
+	ORDER BY
+		ordem
+;
+
+"
+
+#	result2=$(sqlite3 $dbPassMots "$sqlRegistros")
+
+#	registroObj=( $result2 )
+
+
+	echo -e "\033[0m"
+
+	echo
+#             =================================================
+        echo "campo     |Registro"
+        echo "==========|======================================"
+#	echo ${registroObj[0]} " - " ${registroObj[1]}
+
+	sqlite3 $dbPassMots "$sqlRegistros"
+
+#	echo -e "\033[01;37mcod_origem_registro:			\033[00;35m" ${origemRegistroObj[0]}
+#	echo -e "\033[01;37morigem_registro:			\033[00;35m" ${origemRegistroObj[1]}
+
+	echo
+	echo
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	echo -e "\033[0m"
 	echo 
 	echo "Fim da consulta (pressione enter)"
