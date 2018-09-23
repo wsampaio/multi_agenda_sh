@@ -1,74 +1,42 @@
 #!/bin/bash
 
 
-contaLista(){
+origemRegistroLista(){
 	
-	dbFinanceiro="$db/financeiro.db"
+	dbPassmots="$db/passmots.db"
 
     clear
-	echo -e "\033[00;37m"
-	echo "Digite o mês/ano de referência (mm/aaaa):"
-	read mesRef
-
-	if [ ${#mesRef} -eq 0 ]
-		then
-			mesRef=`date +%m/%Y`
-	fi
-
-	clear
-	echo
-	echo "Contas referêntes ao mês: $mesRef"
 	echo
 #             =================================================
-	echo "====|======================|==========|=======|=="
+	echo "cod |Origem do Registro"
+	echo "====|============================================"
 
-	sqlContaLista="
-
+	sqlOrigensRegistro="
 
 SELECT 
 			substr('   ' ||
-			cod_conta,
-			length(cod_conta))
+			cod_origem_registro,
+			length(cod_origem_registro))
 		AS cod, 
-			substr('                     ' ||
-			tipo_conta,
-			length(tipo_conta))
-		AS tipo,
-			strftime('%d/%m/%Y', dt_vencimento) 
-		AS vencimento, 
-			substr('      ' ||
-			printf('%.2f', valor),
-			length(
-			printf('%.2f', valor)
-			))
-		AS valor,
-			CASE
-				WHEN conta_paga = 1 THEN
-					'pg'
-				ELSE
-					''
-			END
-		AS pago
+			substr(origem_registro,
+			0, 44)
+		AS origem
 	FROM 
-		contas 
-			LEFT JOIN tipos_conta
-				USING (cod_tipo_conta)
-	WHERE 
-		strftime('%m/%Y', dt_vencimento) = '$mesRef'
+		origens_registro 
 	ORDER BY
-		dt_vencimento
+		origem_registro
 ;
+
 "
-	if [ -f $dbFinanceiro ]; then
-		sqlite3 $dbFinanceiro "$sqlContaLista"
+	if [ -f $dbPassmots ]; then
+		sqlite3 $dbPassmots "$sqlOrigensRegistro"
 	else
 		echo "O Banco de dados não existe"
 	fi
 	
 	echo
 	echo "Fim da consulta. Digite:"
-	echo "(enter) - Nova consulta;"
-	echo "A - para detalhes da conta;"
+	echo "A - para detalhes do Registro;"
 	echo "B - sair;"
 	
 	read opcao
@@ -76,14 +44,14 @@ SELECT
 	if [ ${opcao,,} = "a" ]
 	then
 		echo
-		echo "digite o código da conta:"
-		read codConta
-		conta $codConta
+		echo "digite o código do registro:"
+		read codOrigemRegistro
+		conta $codOrigemRegistro
 	elif [ ${opcao,,} = "b" ]
 	then
 		main
 	else
-		contaLista
+		origemRegistroLista
 	fi
 	
 	
