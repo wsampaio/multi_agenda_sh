@@ -15,16 +15,16 @@ origemRegistroLista(){
 
 SELECT 
 			substr('   ' ||
-			cod_origem_registro,
-			length(cod_origem_registro))
+			codOrigemRegistro,
+			length(codOrigemRegistro))
 		AS cod, 
-			substr(origem_registro,
+			substr(origemRegistro,
 			0, 44)
 		AS origem
 	FROM 
-		origens_registro 
+		origensRegistro 
 	ORDER BY
-		origem_registro
+		origemRegistro
 ;
 
 "

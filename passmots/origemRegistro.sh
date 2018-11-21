@@ -12,12 +12,12 @@ origemRegistro(){
 	sqlOrigemRegistro="
 
 SELECT 
-		cod_origem_registro,
-		REPLACE(origem_registro, ' ', '_')
+		codOrigemRegistro,
+		REPLACE(origemRegistro, ' ', '_')
 	FROM 
-		origens_registro 
+		origensRegistro 
 	WHERE 
-		cod_origem_registro = $codOrigemRegistro
+		codOrigemRegistro = $codOrigemRegistro
 ;
 "
 
@@ -32,8 +32,8 @@ SELECT
 	origemRegistroObj=( $result )
 	
 	
-	echo -e "\033[01;37mcod_origem_registro:			\033[00;35m" ${origemRegistroObj[0]}
-	echo -e "\033[01;37morigem_registro:			\033[00;35m" ${origemRegistroObj[1]}
+	echo -e "\033[01;37mcodOrigemRegistro:			\033[00;35m" ${origemRegistroObj[0]}
+	echo -e "\033[01;37morigemRegistro:			\033[00;35m" ${origemRegistroObj[1]}
 
 			
         sqlRegistros="
@@ -44,10 +44,10 @@ SELECT
 		registro
 	FROM
 		registros
-			LEFT JOIN tipos_campos
-				USING (cod_tipo_campo)
+			LEFT JOIN tiposCampos
+				USING (codTipoCampo)
 	WHERE
-		cod_origem_registro = ${origemRegistroObj[0]}
+		codOrigemRegistro = ${origemRegistroObj[0]}
 	ORDER BY
 		ordem
 ;
@@ -69,8 +69,8 @@ SELECT
 
 	sqlite3 $dbPassMots "$sqlRegistros"
 
-#	echo -e "\033[01;37mcod_origem_registro:			\033[00;35m" ${origemRegistroObj[0]}
-#	echo -e "\033[01;37morigem_registro:			\033[00;35m" ${origemRegistroObj[1]}
+#	echo -e "\033[01;37mcodOrigemRegistro:			\033[00;35m" ${origemRegistroObj[0]}
+#	echo -e "\033[01;37morigemRegistro:			\033[00;35m" ${origemRegistroObj[1]}
 
 	echo
 	echo
