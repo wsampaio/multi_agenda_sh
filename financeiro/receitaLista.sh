@@ -27,14 +27,14 @@ receitaLista(){
 
 SELECT 
 			substr('   ' ||
-			cod_receita,
-			length(cod_receita))
+			codReceita,
+			length(codReceita))
 		AS cod, 
 			substr('                       ' ||
 			pagador,
 			length(pagador))
 		AS tipo,
-			strftime('%d/%m/%Y', dt_credito) 
+			strftime('%d/%m/%Y', dtCredito) 
 		AS vencimento, 
 			substr('       ' ||
 			printf('%.2f', valor),
@@ -46,11 +46,11 @@ SELECT
 	FROM 
 		receita 
 			LEFT JOIN pagadores
-				USING (cod_pagador)
+				USING (codPagador)
 	WHERE 
-		strftime('%m/%Y', mes_referencia) = '$mesRef'
+		strftime('%m/%Y', mesReferencia) = '$mesRef'
 	ORDER BY
-		dt_credito
+		dtCredito
 ;
 "
 	if [ -f $dbFinanceiro ]; then

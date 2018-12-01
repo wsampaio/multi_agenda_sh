@@ -19,14 +19,14 @@ contasPelaReceita(){
 
 SELECT 
 			substr('   ' ||
-			cod_receita,
-			length(cod_receita))
+			codReceita,
+			length(codReceita))
 		AS cod, 
 			substr('                       ' ||
 			pagador,
 			length(pagador))
 		AS tipo,
-			strftime('%d/%m/%Y', dt_credito) 
+			strftime('%d/%m/%Y', dtCredito) 
 		AS vencimento, 
 			substr('       ' ||
 			printf('%.2f', valor),
@@ -38,11 +38,11 @@ SELECT
 	FROM 
 		receita 
 			LEFT JOIN pagadores
-				USING (cod_pagador)
+				USING (codPagador)
 	WHERE 
-		cod_receita = $codReceita
+		codReceita = $codReceita
 	ORDER BY
-		dt_credito
+		dtCredito
 ;
 "
 	if [ -f $dbFinanceiro ]; then
@@ -64,14 +64,14 @@ SELECT
 
 SELECT 
 			substr('   ' ||
-			cod_conta,
-			length(cod_conta))
+			codConta,
+			length(codConta))
 		AS cod, 
 			substr('                     ' ||
-			tipo_conta,
-			length(tipo_conta))
+			tipoConta,
+			length(tipoConta))
 		AS tipo,
-			strftime('%d/%m/%Y', dt_vencimento) 
+			strftime('%d/%m/%Y', dtVencimento) 
 		AS vencimento, 
 			substr('      ' ||
 			printf('%.2f', valor),
@@ -80,7 +80,7 @@ SELECT
 			))
 		AS valor,
 			CASE
-				WHEN conta_paga = 1 THEN
+				WHEN contaPaga = 1 THEN
 					'pg'
 				ELSE
 					''
@@ -88,21 +88,35 @@ SELECT
 		AS pago
 	FROM 
 		contas 
-			LEFT JOIN tipos_conta
-				USING (cod_tipo_conta)
+			LEFT JOIN tiposContas
+				USING (codTipoConta)
 	WHERE 
-		cod_receita_pagadora = $codReceita
+		codReceitaPagadora = $codReceita
 	ORDER BY
-		dt_vencimento
+		dtVencimento
 ;
 "
 	if [ -f $dbFinanceiro ]; then
-		sqlite3 $dbFinanceiro "$sqlContasPelaReceita"
+			sqlite3 $dbFinanceiro "$sqlContasPelaReceita"
 	else
 		echo "O Banco de dados não existe"
 	fi
 	echo "====|======================|==========|=======|=="
 	
+
+	if [ -f $dbFinanceiro ]; then
+		#soma valor das contas
+		result=$(sqlite3 $dbFinanceiro "$sqlContasPelaReceita")
+		lista=( \""${result//|/\"" \""}"\" )
+
+		echo "lista"
+		echo ${lista[1]}
+
+	fi
+
+
+
+
 
 	echo
 	echo "Fim da consulta (pressione enter)"

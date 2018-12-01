@@ -18,26 +18,26 @@ conta(){
 
 
 SELECT 
-		cod_conta,
-		contas.cod_tipo_conta,
+		codConta,
+		contas.codTipoConta,
 			REPLACE(descricao, ' ', '_')
 		AS descricao,
-		mes_referencia,
-		dt_vencimento,
-		cod_barras,
+		mesReferencia,
+		dtVencimento,
+		codBarras,
 		valor,
-		cod_receita_pagadora,
-		contas.cod_pagador,
-		conta_paga,
-		valor_pago,
-		dt_pagamento
+		codReceitaPagadora,
+		contas.codPagador,
+		contaPaga,
+		valorPago,
+		dtPagamento
 
 	FROM 
 		contas 
-			LEFT JOIN tipos_conta
-				USING (cod_tipo_conta)
+			LEFT JOIN tiposContas
+				USING (codTipoConta)
 	WHERE 
-		cod_conta = $codConta
+		codConta = $codConta
 ;
 "
 
@@ -52,18 +52,18 @@ SELECT
 	contaObj=( $result )
 	
 	
-	echo -e "\033[01;37mcod_conta:			\033[00;35m" ${contaObj[0]}
-	echo -e "\033[01;37mcod_tipo_conta:			\033[00;35m" ${contaObj[1]}
+	echo -e "\033[01;37mcodConta:			\033[00;35m" ${contaObj[0]}
+	echo -e "\033[01;37mcodTipoConta:			\033[00;35m" ${contaObj[1]}
 	echo -e "\033[01;37mdescricao:			\033[00;35m" ${contaObj[2]}
-	echo -e "\033[01;37mmes_referencia:			\033[00;35m" ${contaObj[3]}
-	echo -e "\033[01;37mdt_vencimento:			\033[00;35m" ${contaObj[4]}
-	echo -e "\033[01;37mcod_barras:			\033[00;35m" ${contaObj[5]}
+	echo -e "\033[01;37mmesReferencia:			\033[00;35m" ${contaObj[3]}
+	echo -e "\033[01;37mdtVencimento:			\033[00;35m" ${contaObj[4]}
+	echo -e "\033[01;37mcodBarras:			\033[00;35m" ${contaObj[5]}
 	echo -e "\033[01;37mvalor:				\033[00;35m" ${contaObj[6]}
-	echo -e "\033[01;37mcod_receita_pagadora:		\033[00;35m" ${contaObj[7]}
-	echo -e "\033[01;37mcod_pagador:			\033[00;35m" ${contaObj[8]}
-	echo -e "\033[01;37mconta_paga:			\033[00;35m" ${contaObj[9]}
-	echo -e "\033[01;37mvalor_pago:			\033[00;35m" ${contaObj[10]}
-	echo -e "\033[01;37mdt_pagamento:			\033[00;35m" ${contaObj[11]}
+	echo -e "\033[01;37mcodReceitaPagadora:		\033[00;35m" ${contaObj[7]}
+	echo -e "\033[01;37mcodPagador:			\033[00;35m" ${contaObj[8]}
+	echo -e "\033[01;37mcontaPaga:			\033[00;35m" ${contaObj[9]}
+	echo -e "\033[01;37mvalorPago:			\033[00;35m" ${contaObj[10]}
+	echo -e "\033[01;37mdtPagamento:			\033[00;35m" ${contaObj[11]}
 	
 	
 	

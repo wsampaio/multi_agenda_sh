@@ -27,14 +27,14 @@ contaLista(){
 
 SELECT 
 			substr('   ' ||
-			cod_conta,
-			length(cod_conta))
+			codConta,
+			length(codConta))
 		AS cod, 
 			substr('                     ' ||
-			tipo_conta,
-			length(tipo_conta))
+			tipoConta,
+			length(tipoConta))
 		AS tipo,
-			strftime('%d/%m/%Y', dt_vencimento) 
+			strftime('%d/%m/%Y', dtVencimento) 
 		AS vencimento, 
 			substr('      ' ||
 			printf('%.2f', valor),
@@ -43,7 +43,7 @@ SELECT
 			))
 		AS valor,
 			CASE
-				WHEN conta_paga = 1 THEN
+				WHEN contaPaga = 1 THEN
 					'pg'
 				ELSE
 					''
@@ -51,12 +51,12 @@ SELECT
 		AS pago
 	FROM 
 		contas 
-			LEFT JOIN tipos_conta
-				USING (cod_tipo_conta)
+			LEFT JOIN tiposContas
+				USING (codTipoConta)
 	WHERE 
-		strftime('%m/%Y', dt_vencimento) = '$mesRef'
+		strftime('%m/%Y', dtVencimento) = '$mesRef'
 	ORDER BY
-		dt_vencimento
+		dtVencimento
 ;
 "
 	if [ -f $dbFinanceiro ]; then
@@ -85,10 +85,6 @@ SELECT
 	else
 		contaLista
 	fi
-	
-	
-	
-	
 
 }
 
